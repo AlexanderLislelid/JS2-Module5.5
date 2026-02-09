@@ -19,7 +19,7 @@ export default class Catalogue extends AbstractView {
           <div class="card">
             <h2>${game.name}</h2>
             <p>${game.description}</p>
-            <img src="${game.image.url}" alt="${game.name}" />
+            <img src="${game.image?.url || ""}" alt="${game.name}" />
             <p><strong>${game.released}</strong></p>
           </div>
         `,
