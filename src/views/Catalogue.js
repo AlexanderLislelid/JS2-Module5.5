@@ -23,7 +23,7 @@ export default class Catalogue extends AbstractView {
               <p><strong>${game.released}</strong></p>
               <button
                 type="button"
-                class="btn btn-info details-btn"
+                class="btn btn-primary details-btn"
                 data-id="${game.id}"
               >
                 Info

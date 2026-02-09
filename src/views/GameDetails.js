@@ -13,9 +13,13 @@ export default class GameDetails extends AbstractView {
     const container = document.getElementById("game-details");
 
     container.innerHTML = `
+        <div>
       <h1>${game.name}</h1>
       <p>${game.description}</p>
       <img src="${game.image?.url}" alt="${game.name}">
+      </div>
+      
+      <a class="btn btn-secondary back-btn" href="/catalogue" data-link><</a>
     `;
   }
 }
