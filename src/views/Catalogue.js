@@ -1,33 +1,29 @@
 import AbstractView from "./AbstractView.js";
-import { fetchAndRenderGames } from "../api.js";
+import { fetchGames } from "../api.js";
 
 export default class Catalogue extends AbstractView {
-  constructor(params) {
-    super(params);
-    this.setTitle("Catalogue");
-  }
-
   async getHtml() {
-    return /* HTML */ `
+    return `
       <h1>Catalogue!</h1>
-      <p>Library of old games will render here</p>
-      <div class="card" style="width: 18rem;">
-        <img src="" class="card-img-top" alt="..." />
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-      </div>
-      <button id="fetchGames" class="btn btn-secondary">Fetch games</button>
+      <div id="container"></div>
     `;
   }
 
-  afterRender() {
-    const button = document.getElementById("fetchGames");
-    button.addEventListener("click", fetchAndRenderGames);
+  async afterRender() {
+    const container = document.getElementById("container");
+    const games = await fetchGames();
+
+    container.innerHTML = games
+      .map(
+        (game) => /* HTML */ `
+          <div class="card">
+            <h2>${game.name}</h2>
+            <p>${game.description}</p>
+            <img src="${game.image.url}" alt="${game.name}" />
+            <p><strong>${game.released}</strong></p>
+          </div>
+        `,
+      )
+      .join("");
   }
 }
